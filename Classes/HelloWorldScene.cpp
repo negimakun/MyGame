@@ -101,6 +101,7 @@ bool HelloWorld::init()
 		// add the label as a child to this layer
 		this->addChild(label, 1);
 	}
+
 	// テクスチャファイル名を指定して、スプライトを作成
 	sprite = Sprite::create("kuma.png");
 	// シーングラフにつなぐ
@@ -170,7 +171,18 @@ bool HelloWorld::init()
 	//RotateBy* action1 = RotateBy::create(1.0f, 30, 30);
 
 	//ノードに対してアクションを実行する
-	sprite->runAction(action1);
+	sprite->runAction(action1->clone());
+
+	// テクスチャファイル名を指定して、スプライト2を作成
+	sprite2 = Sprite::create("21.png");
+	// シーングラフにつなぐ
+	this->addChild(sprite2);
+
+	sprite2->setPosition(Vec2(900, visibleSize.height / 2));
+	sprite2->setScale(0.2f);  //大きさの変更
+	//MoveBy* action2 = MoveBy::create(1.0f, Vec2(400, 200));
+	////ノードに対してアクションを実行する
+	sprite2->runAction(action1->clone());
 
 
 	//updateが呼び出されるように

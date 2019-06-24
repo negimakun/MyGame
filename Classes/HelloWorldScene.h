@@ -45,8 +45,8 @@ public:
 	//スプライト
 	cocos2d::Sprite* sprite;
 	cocos2d::Sprite* sprite2;
-	cocos2d::Sprite* sp;
 /*
+	cocos2d::Sprite* sp;
 	int state = 0;
 
 	int rotate = 0;
