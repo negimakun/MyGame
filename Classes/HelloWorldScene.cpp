@@ -153,7 +153,8 @@ bool HelloWorld::init()
 
 	//  //////19-06-24~~~~
 
-	//MoveBy* action1 = MoveBy::create(1.0f, Vec2(200, 100));
+	MoveBy* action1 = MoveBy::create(1.0f, Vec2(400, 200));
+	//EaseInOut* action2 = EaseInOut::create(action1, 2.0f);
 	//ScaleBy* action1 = ScaleBy::create(1.0f,5.0f);
 	//JumpTo* action1 = JumpTo::create(1.0f, Vec2(200, 100), 500.0f, 1);
 	//ベジェ曲線
@@ -163,9 +164,11 @@ bool HelloWorld::init()
 	//conf.endPosition = Vec2(1000, 360);
 	//BezierTo* action1 = BezierTo::create(2.0f, ccBezierConfig());
 	//フェードイン
-	sprite->setOpacity(0);
-	FadeIn* action1 = FadeIn::create(1.0f);
+	//sprite->setOpacity(0);
+	//FadeIn* action1 = FadeIn::create(1.0f);
 	//FadeInは最初見えない状態にしないといけない
+	//RotateBy* action1 = RotateBy::create(1.0f, 30, 30);
+
 	//ノードに対してアクションを実行する
 	sprite->runAction(action1);
 
