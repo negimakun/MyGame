@@ -101,26 +101,29 @@ bool HelloWorld::init()
 		// add the label as a child to this layer
 		this->addChild(label, 1);
 	}
-
-	//乱数の初期化
-	//Random rnd = new Random();と一緒
-	srand(time(nullptr));
-
-	for (int i = 0; i < 5; i++)
+	//乱数　移動
 	{
-		sprite[i] = Sprite::create("kuma.png");
-		this->addChild(sprite[i]);
+		//乱数の初期化
+		//Random rnd = new Random();と一緒
+		//srand(time(nullptr));
 
-		sprite[i]->setPosition(Vec2(200 * i, visibleSize.height / 2));
-		sprite[i]->setScale(0.2f);  //大きさの変更
+		//for (int i = 0; i < 5; i++)
+		//{
+		//	sprite[i] = Sprite::create("kuma.png");
+		//	this->addChild(sprite[i]);
 
-		float mx, my;
-		mx = (float)rand() / RAND_MAX * 500;
-		my = (float)rand() / RAND_MAX * 500;
+		//	sprite[i]->setPosition(Vec2(200 * i, visibleSize.height / 2));
+		//	sprite[i]->setScale(0.2f);  //大きさの変更
 
-		MoveBy* action1 = MoveBy::create(1.0f, Vec2(mx, my));
-		sprite[i]->runAction(action1->clone());
+		//	float mx, my;
+		//	mx = (float)rand() / RAND_MAX * 500 - 250;
+		//	my = (float)rand() / RAND_MAX * 500 - 250;
+
+		//	MoveBy* action1 = MoveBy::create(1.0f, Vec2(mx, my));
+		//	sprite[i]->runAction(action1->clone());
+		//}
 	}
+
 
 	//// テクスチャファイル名を指定して、スプライトを作成
 	//sprite = Sprite::create("kuma.png");
@@ -205,6 +208,61 @@ bool HelloWorld::init()
 	//////ノードに対してアクションを実行する
 	//sprite2->runAction(action1->clone());
 
+
+	//Actionやってみよう1
+	{
+		/*sprite[0] = Sprite::create("kuma.png");
+		this->addChild(sprite[0]);
+		sprite[0]->setPosition(Vec2(200, 100));
+		sprite[0]->setScale(0.2f);
+		JumpBy* action = JumpBy::create(1.0f, Vec2(300, 100), 500.0f, 1);
+		sprite[0]->runAction(action->clone());
+
+		sprite[1] = Sprite::create("21.png");
+		this->addChild(sprite[1]);
+		sprite[1]->setPosition(Vec2(400, 100));
+		sprite[1]->setScale(0.2f);
+		sprite[1]->runAction(action->clone());*/
+	}
+	//Actionやってみよう2
+	for (int i = 0; i < 10; i++)
+	{
+		/*sprite[i] = Sprite::create("kuma.png");
+		this->addChild(sprite[i]);
+		sprite[i]->setPosition(Vec2(200 + i * 100, 100));
+		sprite[i]->setScale(0.2f);
+		JumpBy* action = JumpBy::create(1.0f, Vec2(300, 100), 500.0f, 1);
+		sprite[i]->runAction(action->clone());*/
+	}
+
+	{
+		//乱数の初期化
+		//Random rnd = new Random();と一緒
+		srand(time(nullptr));
+
+		for (int i = 0; i < 10; i++)
+		{
+			sprite[i] = Sprite::create("kuma.png");
+			this->addChild(sprite[i]);
+
+			float posx;
+			float posy;
+			posx = (float)rand() / RAND_MAX * visibleSize.width;
+			posy = (float)rand() / RAND_MAX * visibleSize.height;
+
+			sprite[i]->setPosition(Vec2(posx, posy));
+			sprite[i]->setScale(0.2f);  //大きさの変更
+
+			float mx;
+			float my;
+			mx = (float)rand() / RAND_MAX * visibleSize.width;
+			my = (float)rand() / RAND_MAX * visibleSize.height;
+
+
+			MoveTo* action1 = MoveTo::create(1.0f, Vec2(mx,my));
+			sprite[i]->runAction(action1->clone());
+		}
+	}
 
 	//updateが呼び出されるように
 	this->scheduleUpdate();
