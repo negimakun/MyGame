@@ -44,10 +44,18 @@ public:
 
 	//スプライト
 	cocos2d::Sprite* sprite;
-
+	cocos2d::Sprite* sprite2;
+	cocos2d::Sprite* sp;
+/*
 	int state = 0;
 
 	int rotate = 0;
+
+	int col = 255;
+
+	float opacity = 255;
+
+	float rec = 0;*/
 };
 
 #endif // __HELLOWORLD_SCENE_H__

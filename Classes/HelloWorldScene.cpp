@@ -101,41 +101,74 @@ bool HelloWorld::init()
 		// add the label as a child to this layer
 		this->addChild(label, 1);
 	}
-	//// テクスチャファイル名を指定して、スプライトを作成
-	//sprite = Sprite::create("kuma.png");
-	//// シーングラフにつなぐ
-	//this->addChild(sprite);
-
-	//sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	//sprite->setScale(0.4f);  //大きさの変更
-	//sprite->setVisible(false);  //見えなくする（描画を飛ばす）
-	/*0xffと255は同じ*/
-	//sprite->setOpacity(128);     //不透明度
-
-	
-	/*sprite->setAnchorPoint(Vec2(0, 1));
-	sprite->setRotation(135.0f);*/
-
-
-	//sprite->setColor(Color3B(255, 0, 0));    //色の変更
-
-
-	//sprite->setFlippedX(true);   //画像の反転(true)
-
-
-	//sprite->setTextureRect(Rect(225, 273, 126, 167));
-
-
 	// テクスチャファイル名を指定して、スプライトを作成
-	sprite = Sprite::create("sample03.png");
+	sprite = Sprite::create("kuma.png");
 	// シーングラフにつなぐ
 	this->addChild(sprite);
 
 	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	sprite->setScale(0.2f);  //大きさの変更
+	//sprite->setVisible(false);  //見えなくする（描画を飛ばす）
+	/*0xffと255は同じ*/
+	//sprite->setOpacity(128);     //不透明度
+	//
+	//
+	//sprite->setAnchorPoint(Vec2(0, 1));
+	//sprite->setRotation(135.0f);
+	//
+	//
+	//sprite->setColor(Color3B(255, 0, 0));    //色の変更
+	//
+	//
+	//sprite->setFlippedX(true);   //画像の反転(true)
+	//
+	//
+	//sprite->setTextureRect(Rect(225, 273, 126, 167));
+	//
+	//
+	//// テクスチャファイル名を指定して、スプライトを作成
+	//sprite = Sprite::create("sample03.png");
+	//// シーングラフにつなぐ
+	//this->addChild(sprite);
+	//
+	//sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	//
+	//sprite->setScale(4);
+	//
+	//sprite->setTextureRect(Rect(0, 64, 32, 32));
 
-	sprite->setScale(4);
+	//sp = Sprite::create("sample03.png");
+	//
+	//// シーングラフにつなぐ
+	//this->addChild(sp);
+	//
+	//sp->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	//
+	//sp->setScale(4);
+	//sp->getTexture()->setAliasTexParameters();
+	//
+	//sp->setTextureRect(Rect(0, 64, 32, 32));
+	//
+	//sp->setOpacity(0);
 
-	sprite->setTextureRect(Rect(0, 64, 32, 32));
+	//  //////19-06-24~~~~
+
+	//MoveBy* action1 = MoveBy::create(1.0f, Vec2(200, 100));
+	//ScaleBy* action1 = ScaleBy::create(1.0f,5.0f);
+	//JumpTo* action1 = JumpTo::create(1.0f, Vec2(200, 100), 500.0f, 1);
+	//ベジェ曲線
+	//ccBezierConfig conf;
+	//conf.controlPoint_1 = Vec2(800, 700);
+	//conf.controlPoint_2 = Vec2(1000, 700);
+	//conf.endPosition = Vec2(1000, 360);
+	//BezierTo* action1 = BezierTo::create(2.0f, ccBezierConfig());
+	//フェードイン
+	sprite->setOpacity(0);
+	FadeIn* action1 = FadeIn::create(1.0f);
+	//FadeInは最初見えない状態にしないといけない
+	//ノードに対してアクションを実行する
+	sprite->runAction(action1);
+
 
 	//updateが呼び出されるように
 	this->scheduleUpdate();
@@ -194,42 +227,46 @@ void HelloWorld::update(float delta)
 	//	pos.x += -5;
 	//	//移動後の座標を反映
 	//	sprite->setPosition(pos);
-
+	//
 	//	if (pos.x <= 255)
 	//	{
 	//		state = 1;
 	//	}
 	//	break;
+
 	//case 1://下
 	//	pos = sprite->getPosition();
 	//	pos.y += -5;
 	//	sprite->setPosition(pos);
-
+	//
 	//	if (pos.y <= 235)
 	//	{
 	//		state = 2;
 	//	}
 	//	break;
+
 	//case 2://右
 	//	pos = sprite->getPosition();
 	//	pos.x += 5;
 	//	sprite->setPosition(pos);
-
+	//
 	//	if (pos.x >= 1280 - 255)
 	//	{
 	//		state = 3;
 	//	}
 	//	break;
+
 	//case 3://上
 	//	pos = sprite->getPosition();
 	//	pos.y += 5;
 	//	sprite->setPosition(pos);
-
+	//
 	//	if (pos.y >= 720 - 235)
 	//	{
 	//		state = 0;
 	//	}
 	//	break;
+
 	//default:
 	//	break;
 	//}
@@ -243,6 +280,82 @@ void HelloWorld::update(float delta)
 #pragma region 左上を中心に回転
 	/*rotate += 10;
 	sprite->setRotation(rotate);*/
+#pragma endregion
+
+#pragma region 色を三秒で変更
+	/*Color3B color = sprite->getColor();
+
+	if (color.b < 255)
+	{
+		color.r -= 255.0f / 180.0f;
+		color.b += 255.0f / 180.0f;
+
+		sprite->setColor(color);
+	}*/
+
+	/*if (col > 0)
+	{
+		col -= 255.0f / 180.0f;
+		sprite->setColor(Color3B(col, 0, 255 - col));
+	}*/
+
+#pragma endregion
+
+#pragma region クロスフェード
+
+	/*if (opacity > 0)
+	{
+		opacity -= 255.0f / 300.0f;
+
+		sprite->setOpacity(opacity);
+		sp->setOpacity(255 - opacity);
+	}*/
+
+#pragma endregion
+
+#pragma region 往復
+
+	//Vec2 pos;
+	//switch (state)
+	//{
+	//case 0://左
+	//	sprite->setFlippedX(true);
+	//	pos = sprite->getPosition();
+	//	pos.x += -5;
+	//	//移動後の座標を反映
+	//	sprite->setPosition(pos);
+
+	//	if (pos.x <= 100)
+	//	{
+	//		state = 1;
+	//	}
+	//	break;
+	//case 1://右
+	//	sprite->setFlippedX(false);
+	//	pos = sprite->getPosition();
+	//	pos.x += 5;
+	//	sprite->setPosition(pos);
+
+	//	if (pos.x >= 1280 - 100)
+	//	{
+	//		state = 0;
+	//	}
+	//	break;
+
+	//}
+#pragma endregion
+
+#pragma region パターンアニメーション
+	/*sprite->setOpacity(0);
+	sp->setOpacity(255);
+
+	rec += 0.1f;
+	if (rec > 2)
+	{
+		rec = 0;
+	}
+	sp->setTextureRect(Rect(64 * (int)rec, 64, 32, 32));
+*/
 #pragma endregion
 
 }
