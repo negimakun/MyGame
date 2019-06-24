@@ -102,87 +102,100 @@ bool HelloWorld::init()
 		this->addChild(label, 1);
 	}
 
-	// テクスチャファイル名を指定して、スプライトを作成
-	sprite = Sprite::create("kuma.png");
-	// シーングラフにつなぐ
-	this->addChild(sprite);
+	for (int i = 0; i < 5; i++)
+	{
+		sprite[i] = Sprite::create("kuma.png");
+		this->addChild(sprite[i]);
 
-	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	sprite->setScale(0.2f);  //大きさの変更
-	//sprite->setVisible(false);  //見えなくする（描画を飛ばす）
-	/*0xffと255は同じ*/
-	//sprite->setOpacity(128);     //不透明度
-	//
-	//
-	//sprite->setAnchorPoint(Vec2(0, 1));
-	//sprite->setRotation(135.0f);
-	//
-	//
-	//sprite->setColor(Color3B(255, 0, 0));    //色の変更
-	//
-	//
-	//sprite->setFlippedX(true);   //画像の反転(true)
-	//
-	//
-	//sprite->setTextureRect(Rect(225, 273, 126, 167));
-	//
-	//
+		sprite[i]->setPosition(Vec2(200 * i, visibleSize.height / 2));
+		sprite[i]->setScale(0.2f);  //大きさの変更
+
+		MoveBy* action1 = MoveBy::create(1.0f, Vec2(400, 200));
+		sprite[i]->runAction(action1->clone());
+	}
+
 	//// テクスチャファイル名を指定して、スプライトを作成
-	//sprite = Sprite::create("sample03.png");
+	//sprite = Sprite::create("kuma.png");
 	//// シーングラフにつなぐ
 	//this->addChild(sprite);
-	//
+
 	//sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	//
-	//sprite->setScale(4);
-	//
-	//sprite->setTextureRect(Rect(0, 64, 32, 32));
+	//sprite->setScale(0.2f);  //大きさの変更
+	////sprite->setVisible(false);  //見えなくする（描画を飛ばす）
+	///*0xffと255は同じ*/
+	////sprite->setOpacity(128);     //不透明度
+	////
+	////
+	////sprite->setAnchorPoint(Vec2(0, 1));
+	////sprite->setRotation(135.0f);
+	////
+	////
+	////sprite->setColor(Color3B(255, 0, 0));    //色の変更
+	////
+	////
+	////sprite->setFlippedX(true);   //画像の反転(true)
+	////
+	////
+	////sprite->setTextureRect(Rect(225, 273, 126, 167));
+	////
+	////
+	////// テクスチャファイル名を指定して、スプライトを作成
+	////sprite = Sprite::create("sample03.png");
+	////// シーングラフにつなぐ
+	////this->addChild(sprite);
+	////
+	////sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	////
+	////sprite->setScale(4);
+	////
+	////sprite->setTextureRect(Rect(0, 64, 32, 32));
 
-	//sp = Sprite::create("sample03.png");
-	//
-	//// シーングラフにつなぐ
-	//this->addChild(sp);
-	//
-	//sp->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	//
-	//sp->setScale(4);
-	//sp->getTexture()->setAliasTexParameters();
-	//
-	//sp->setTextureRect(Rect(0, 64, 32, 32));
-	//
-	//sp->setOpacity(0);
+	////sp = Sprite::create("sample03.png");
+	////
+	////// シーングラフにつなぐ
+	////this->addChild(sp);
+	////
+	////sp->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	////
+	////sp->setScale(4);
+	////sp->getTexture()->setAliasTexParameters();
+	////
+	////sp->setTextureRect(Rect(0, 64, 32, 32));
+	////
+	////sp->setOpacity(0);
 
-	//  //////19-06-24~~~~
+	////  //////19-06-24~~~~
+	{
+		//MoveBy* action1 = MoveBy::create(1.0f, Vec2(400, 200));
 
-	MoveBy* action1 = MoveBy::create(1.0f, Vec2(400, 200));
-	//EaseInOut* action2 = EaseInOut::create(action1, 2.0f);
-	//ScaleBy* action1 = ScaleBy::create(1.0f,5.0f);
-	//JumpTo* action1 = JumpTo::create(1.0f, Vec2(200, 100), 500.0f, 1);
-	//ベジェ曲線
-	//ccBezierConfig conf;
-	//conf.controlPoint_1 = Vec2(800, 700);
-	//conf.controlPoint_2 = Vec2(1000, 700);
-	//conf.endPosition = Vec2(1000, 360);
-	//BezierTo* action1 = BezierTo::create(2.0f, ccBezierConfig());
-	//フェードイン
-	//sprite->setOpacity(0);
-	//FadeIn* action1 = FadeIn::create(1.0f);
-	//FadeInは最初見えない状態にしないといけない
-	//RotateBy* action1 = RotateBy::create(1.0f, 30, 30);
-
-	//ノードに対してアクションを実行する
-	sprite->runAction(action1->clone());
-
-	// テクスチャファイル名を指定して、スプライト2を作成
-	sprite2 = Sprite::create("21.png");
-	// シーングラフにつなぐ
-	this->addChild(sprite2);
-
-	sprite2->setPosition(Vec2(900, visibleSize.height / 2));
-	sprite2->setScale(0.2f);  //大きさの変更
-	//MoveBy* action2 = MoveBy::create(1.0f, Vec2(400, 200));
+		////EaseInOut* action2 = EaseInOut::create(action1, 2.0f);
+		////ScaleBy* action1 = ScaleBy::create(1.0f,5.0f);
+		////JumpTo* action1 = JumpTo::create(1.0f, Vec2(200, 100), 500.0f, 1);
+		////ベジェ曲線
+		////ccBezierConfig conf;
+		////conf.controlPoint_1 = Vec2(800, 700);
+		////conf.controlPoint_2 = Vec2(1000, 700);
+		////conf.endPosition = Vec2(1000, 360);
+		////BezierTo* action1 = BezierTo::create(2.0f, ccBezierConfig());
+		////フェードイン
+		////sprite->setOpacity(0);
+		////FadeIn* action1 = FadeIn::create(1.0f);
+		////FadeInは最初見えない状態にしないといけない
+		////RotateBy* action1 = RotateBy::create(1.0f, 30, 30);
+	}
 	////ノードに対してアクションを実行する
-	sprite2->runAction(action1->clone());
+	//sprite->runAction(action1->clone());
+
+	//// テクスチャファイル名を指定して、スプライト2を作成
+	//sprite2 = Sprite::create("21.png");
+	//// シーングラフにつなぐ
+	//this->addChild(sprite2);
+
+	//sprite2->setPosition(Vec2(900, visibleSize.height / 2));
+	//sprite2->setScale(0.2f);  //大きさの変更
+	////MoveBy* action2 = MoveBy::create(1.0f, Vec2(400, 200));
+	//////ノードに対してアクションを実行する
+	//sprite2->runAction(action1->clone());
 
 
 	//updateが呼び出されるように
