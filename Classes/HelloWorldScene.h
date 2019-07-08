@@ -32,6 +32,8 @@ class HelloWorld : public cocos2d::Scene
 public:
     static cocos2d::Scene* createScene();
 
+	void myFunction();//関数宣言
+
     virtual bool init();
 
 	void update(float delta);
@@ -45,7 +47,10 @@ public:
 	//スプライト
 	//cocos2d::Sprite* sprite;
 	//cocos2d::Sprite* sprite2;
-	cocos2d::Sprite* sprite[100];
+	//cocos2d::Sprite* sprite[100];
+
+	//オーディオIDを入れる変数（メンバ変数にするとよい）
+	int audioID;
 
 /*
 	cocos2d::Sprite* sp;

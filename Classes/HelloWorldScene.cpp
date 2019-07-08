@@ -24,6 +24,7 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "AudioEngine.h"
 
 USING_NS_CC;
 
@@ -225,44 +226,86 @@ bool HelloWorld::init()
 		sprite[1]->runAction(action->clone());*/
 	}
 	//Actionやってみよう2
-	for (int i = 0; i < 10; i++)
-	{
-		/*sprite[i] = Sprite::create("kuma.png");
-		this->addChild(sprite[i]);
-		sprite[i]->setPosition(Vec2(200 + i * 100, 100));
-		sprite[i]->setScale(0.2f);
-		JumpBy* action = JumpBy::create(1.0f, Vec2(300, 100), 500.0f, 1);
-		sprite[i]->runAction(action->clone());*/
-	}
 
-	{
-		//乱数の初期化
-		//Random rnd = new Random();と一緒
-		srand(time(nullptr));
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	/*sprite[i] = Sprite::create("kuma.png");
+	//	this->addChild(sprite[i]);
+	//	sprite[i]->setPosition(Vec2(200 + i * 100, 100));
+	//	sprite[i]->setScale(0.2f);
+	//	JumpBy* action = JumpBy::create(1.0f, Vec2(300, 100), 500.0f, 1);
+	//	sprite[i]->runAction(action->clone());*/
+	//}
 
-		for (int i = 0; i < 10; i++)
-		{
-			sprite[i] = Sprite::create("kuma.png");
-			this->addChild(sprite[i]);
+	//{
+	//	//乱数の初期化
+	//	//Random rnd = new Random();と一緒
+	//	srand(time(nullptr));
+	//
+	//	for (int i = 0; i < 10; i++)
+	//	{
+	//		sprite[i] = Sprite::create("kuma.png");
+	//		this->addChild(sprite[i]);
+	//
+	//		float posx;
+	//		float posy;
+	//		posx = (float)rand() / RAND_MAX * visibleSize.width;
+	//		posy = (float)rand() / RAND_MAX * visibleSize.height;
+	//
+	//		sprite[i]->setPosition(Vec2(posx, posy));
+	//		sprite[i]->setScale(0.2f);  //大きさの変更
+	//
+	//		float mx;
+	//		float my;
+	//		mx = (float)rand() / RAND_MAX * visibleSize.width;
+	//		my = (float)rand() / RAND_MAX * visibleSize.height;
+	//
+	//
+	//		MoveTo* action1 = MoveTo::create(1.0f, Vec2(mx,my));
+	//		sprite[i]->runAction(action1->clone());
+	//	}
+	//}
+	
+#pragma region 休みの日
+	//// Spriteの生成
+	//Sprite* spr = Sprite::create("HelloWorld.png");
+	//this->addChild(spr);
+	//spr->setPosition(Vec2(visibleSize.width - 100, visibleSize.height - 100));
+	//spr->setScale(0.2f);
+	//
+	//// 移動アクションの生成
+	//MoveBy* moveLeft = MoveBy::create(1.0f, Vec2(-(visibleSize.width - 200), 0));
+	//MoveBy* moveDown = MoveBy::create(1.0f, Vec2(0, -(visibleSize.height - 200)));
+	//MoveBy* moveRight = MoveBy::create(1.0f, Vec2(visibleSize.width - 200, 0));
+	//MoveBy* moveUp = MoveBy::create(1.0f, Vec2(0, visibleSize.height - 200));
+	//
+	//// 連続アクションの生成
+	//Sequence* seq1 = Sequence::create(moveLeft, moveDown, moveRight, moveUp, nullptr);
+	//
+	//// 無限繰り返しアクションの生成
+	//RepeatForever* repeat = RepeatForever::create(seq1);
+	//
+	//// アクションの実行
+	//spr->runAction(repeat);
 
-			float posx;
-			float posy;
-			posx = (float)rand() / RAND_MAX * visibleSize.width;
-			posy = (float)rand() / RAND_MAX * visibleSize.height;
+#pragma endregion
 
-			sprite[i]->setPosition(Vec2(posx, posy));
-			sprite[i]->setScale(0.2f);  //大きさの変更
-
-			float mx;
-			float my;
-			mx = (float)rand() / RAND_MAX * visibleSize.width;
-			my = (float)rand() / RAND_MAX * visibleSize.height;
+	//再生するとオーディオIDが割り振られる
+	audioID = experimental::AudioEngine::play2d("11rsm.mp3",true,0.1f);
 
 
-			MoveTo* action1 = MoveTo::create(1.0f, Vec2(mx,my));
-			sprite[i]->runAction(action1->clone());
-		}
-	}
+	DelayTime* delay = DelayTime::create(1.0f);
+
+	//関数呼び出しアクションの作成
+	//CC_CALLBACK_0　第一引数：呼び出したいメンバ関数
+	//CC_CALLBACK_0　第二引数：メンバ関数を呼び出すオブジェクト
+	CallFunc* callFunc =
+		CallFunc::create(CC_CALLBACK_0(HelloWorld::myFunction, this));
+
+	Sequence* seq = Sequence::create(delay, callFunc, nullptr);
+
+	//アクションを実行
+	this->runAction(seq);
 
 	//updateが呼び出されるように
 	this->scheduleUpdate();
@@ -452,5 +495,46 @@ void HelloWorld::update(float delta)
 */
 #pragma endregion
 
+#pragma region 音楽の停止、一時停止
+
+	////経過時間を取得
+	//unsigned int total =
+	//Director::getInstance()->getTotalFrames();
+
+	////if (total == 60) //一秒後
+	////{
+	////	//再生停止
+	////	//experimental::AudioEngine::stop(audioID);
+	////	//再生一時停止
+	////	experimental::AudioEngine::pause(audioID);
+	////}
+	////if (total == 120)
+	////{
+	////	experimental::AudioEngine::resume(audioID);
+	////}
+
+	//if (total%60 == 0)
+	//{
+	//	if ((total/60) % 2 == 1)
+	//	{
+	//		experimental::AudioEngine::pause(audioID);
+	//	}
+	//	else
+	//	{
+	//		experimental::AudioEngine::resume(audioID);
+	//	}
+	//}
+
+#pragma endregion
+
+}
+
+//任意の自作関数
+void HelloWorld::myFunction()
+{
+	//任意の処理
+	Sprite* spr = Sprite::create("21.png");
+	this->addChild(spr);
+	spr->setPosition(500, 500);
 }
 
